@@ -7,6 +7,10 @@ class Edge {
 		this.cost = cost;
 	}
 
+	contains(node){
+		return this.source === node || this.dest === node;
+	}
+
 	opposite(node) {
 		if (node === this.source) {
 			return this.dest;
@@ -34,6 +38,15 @@ class Node {
 		return edge;
 	}
 
+	hasPathTo(node){
+		return this.edges.some(e => e.contains(node));
+	}
+
+	costTo(node){
+		let edge = this.edges.find(e => e.contains(node));
+		return edge.cost;
+	}
+
 	adjacents() {
 		let nodes = this.edges.map(e => e.opposite(this));
 		return nodes;
@@ -43,10 +56,17 @@ class Node {
 export class Graph {
 
 	constructor() {
-		this.size = 0;
 		this.nodes = [];
 		this.edges = [];
 		this.valueToNode = new Map();
+	}
+
+	get numNodes(){
+		return this.nodes.length;
+	}
+
+	get nomEdges(){
+		return thsi.edges.length;
 	}
 
 	add(value) {

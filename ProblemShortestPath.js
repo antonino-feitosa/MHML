@@ -1,7 +1,7 @@
 
-import SampleArray from "./SampleArray";
-import Graph from "./Graph";
-import Solve from "./Solve";
+import SampleArray from "./SampleArray.js";
+import Graph from "./Graph.js";
+import Solve from "./Solve.js";
 
 export class GeneratorShortestPath {
 
@@ -49,11 +49,57 @@ export class ProblemShortestPath {
 	}
 
 	emptySolve() {
-
+		let vet = Array(this.graph.numNodes - 1).fill(0.0);
+		let solve = new Solve(vet, this);
+		return solve;
 	}
 
-	evaluate(solve) {
+	bestCost(){
+		return this.bestSolve.cost;
+	}
+
+	bestSolve(){
+		let inf = this.graph.numNodes() * 10;
+		let nodes = this.graph.nodes.map(x => x);
+		let dist = nodes.reduce((map, node) => map.set(node, inf), new Map());
+		let prev = nodes.reduce((map, node) => map.set(node, null), new Map());
+		dist.set(this.source, 0);
+		while(nodes.length > 0){
+			let [u, cost] = [...dist.entries()].reduce(([mk, mv], [k, v]) => v < mv ? [k,v] : [mk, mv])
+			for(let v of u.node.adjacents().filter(n => dist.has(n))){
+				let alt = dist.get(u) + u.costTo(v);
+				if(alt < dist.get(v)){
+					dist.set(v, alt);
+					prev.set(v, u);
+				}
+			}
+		}
+		return this._findPath(prev, dest);
+	}
+
+	_findPath(prev, dest){
+		if(prev.has(this.dest) || this.source === this.dest){
+			let priority = 1.0;
+			let delta = 1.0 / this.graph.numNodes;
+			let target = this.dest;
+			let index = 0;
+			let solve = this.emptySolve();
+			while(target){
+				solve.vector[index++] = priority;
+				priority = priority - delta;
+				target = prev.get(target);
+			}
+			solve.cost = dist.get(this.dest);
+			solve.isValid = true;
+			return solve;
+		} else {
+			return this.emptySolve();
+		}
+	}
+
+	evaluate(solve) { // decode by priority, from source to dest
 		let sum = 0;
 
+		return cost;
 	}
 }

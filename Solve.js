@@ -1,11 +1,19 @@
 
 export class Solve {
 
-	constructor(size, vector){
-		this.size = size;
+	constructor(vector, problem){
 		this.cost = null;
 		this.vector = vector;
 		this.isValid = false;
+		this.problem = problem;
+	}
+
+	evaluate(){
+		return this.problem.evaluate(this);
+	}
+
+	get size(){
+		return this.vector.length;
 	}
 
 	equals(other){
