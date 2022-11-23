@@ -1,5 +1,5 @@
 
-export class Solve {
+class Solve {
 
 	constructor(vector, problem){
 		this.cost = null;
@@ -43,3 +43,5 @@ export class Solve {
 		return cmp;
 	}
 }
+
+module.exports = Solve;

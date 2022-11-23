@@ -1,7 +1,8 @@
 
-export class SampleArray extends Array {
+class SampleArray extends Array {
 
-	constructor(rand){
+	constructor(rand) {
+		super();
 		this.rand = rand;
 	}
 
@@ -14,8 +15,10 @@ export class SampleArray extends Array {
 		}
 	}
 
-	choice(){
+	choice() {
 		let index = this.rand.nextInt(this.length);
 		return this[index];
 	}
-  }
+}
+
+module.exports = SampleArray;

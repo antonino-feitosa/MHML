@@ -33,7 +33,7 @@ class Node {
 	connect(node, cost) {
 		let edge = new Edge(this, node, cost);
 		this.edges.push(edge);
-		node.edges.push(this);
+		node.edges.push(edge);
 		this.graph.edges.push(edge);
 		return edge;
 	}
@@ -44,6 +44,8 @@ class Node {
 
 	costTo(node){
 		let edge = this.edges.find(e => e.contains(node));
+		if(!edge)
+			throw node + ' It is not a neighbor';
 		return edge.cost;
 	}
 
@@ -53,7 +55,7 @@ class Node {
 	}
 }
 
-export class Graph {
+class Graph {
 
 	constructor() {
 		this.nodes = [];
@@ -80,3 +82,5 @@ export class Graph {
 		return this.valueToNode.get(value);
 	}
 }
+
+module.exports = Graph;

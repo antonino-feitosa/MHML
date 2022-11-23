@@ -1,5 +1,5 @@
 
-export class Random {
+class Random {
 
 	constructor(seed = 'random') {
 		this.rand = Random.create(String(seed));
@@ -59,3 +59,5 @@ export class Random {
 		};
 	}
 }
+
+module.exports = Random;
