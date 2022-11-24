@@ -1,0 +1,106 @@
+
+const check = require('./Tests.js');
+const Graph = require("../src/Graph");
+const Random = require("../src/Random");
+const ProblemShortestPath = require('../src/ProblemShortestPath');
+
+function createGraph() {
+	let g = new Graph();
+
+	for (let i = 0; i < 8; i++) {
+		g.add(String.fromCharCode('A'.charCodeAt() + i));
+	}
+	let model = [
+		['A', 'B', 2],
+		['A', 'C', 1],
+		['A', 'D', 3],
+		['B', 'E', 3],
+		['B', 'F', 1],
+		['C', 'E', 2],
+		['C', 'F', 3],
+		['C', 'G', 1],
+		['D', 'F', 2],
+		['D', 'G', 3],
+		['E', 'H', 2],
+		['F', 'H', 3],
+		['G', 'H', 1],
+	];
+	for (let [source, dest, cost] of model) {
+		g.get(source).connect(g.get(dest), cost);
+	}
+	return g;
+}
+
+function testEmpty1(){
+	let g = createGraph();
+	let rand = new Random();
+	let problem = new ProblemShortestPath(g, g.get('A'), g.get('H'), rand);
+	let solve = problem.emptySolve();
+	// 0123456
+	//ABCDEFGH
+	check(7, solve.size, 'Solve size');
+	solve.vector[0] = 1.0;
+	solve.vector[3] = 0.9;
+	solve.vector[6] = 0.8;
+	solve.vector[1] = 0.95;
+
+	let path = problem.path(solve);
+	check('ABEH', path.reduce((total,x) => total +  x.value, ''), 'Empty Path 1!');
+	check(7, solve.evaluate(), 'Empty Cost 1!');
+}
+
+function testEmpty2(){
+	let g = createGraph();
+	let rand = new Random();
+	let problem = new ProblemShortestPath(g, g.get('A'), g.get('H'), rand);
+	let solve = problem.emptySolve();
+	// 0123456
+	//ABCDEFGH
+	check(7, solve.size, 'Solve size');
+	solve.vector[2] = 1.0;
+	solve.vector[4] = 0.9;
+	solve.vector[6] = 0.8;
+	solve.vector[1] = 0.95;
+
+	let path = problem.path(solve);
+	check('ADFH', path.reduce((total,x) => total +  x.value, ''), 'Empty Path 2!');
+	check(8, solve.evaluate(), 'Empty Cost 2!');
+}
+
+function testBest(){
+	let g = createGraph();
+	let rand = new Random();
+	let problem = new ProblemShortestPath(g, g.get('A'), g.get('H'), rand);
+	let best = problem.bestSolve();
+	path = problem.path(best);
+	check('ACGH', path.reduce((total,x) => total +  x.value, ''), 'Best Path!');
+	check(3, best.evaluate(), 'Best Cost!');
+}
+
+function testRandom(seed){
+	let g = createGraph();
+	let rand = new Random(seed);
+	let problem = new ProblemShortestPath(g, g.get('A'), g.get('H'), rand);
+	let best = problem.sampleSolve();
+	best.evaluate();
+	path = problem.path(best);
+}
+
+function testGenerator(seed){
+	let rand = new Random(seed);
+	let problem = ProblemShortestPath.makeProblem(rand);
+	let solve = problem.sampleSolve();
+	solve.evaluate();
+	problem.path(solve);
+}
+
+testEmpty1();
+testEmpty2();
+testBest();
+testRandom(1);
+testRandom(2);
+testRandom(3);
+testGenerator(1);
+testGenerator(2);
+testGenerator(3);
+testGenerator(4);

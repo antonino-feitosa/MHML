@@ -30,10 +30,12 @@ class Node {
 		this.graph = graph;
 	}
 
-	connect(node, cost) {
+	connect(node, cost, directed = true) {
 		let edge = new Edge(this, node, cost);
 		this.edges.push(edge);
-		node.edges.push(edge);
+		if(!directed){
+			node.edges.push(edge);
+		}
 		this.graph.edges.push(edge);
 		return edge;
 	}
