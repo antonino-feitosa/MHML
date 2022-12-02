@@ -1,8 +1,7 @@
 
-const SampleArray = require("./SampleArray");
-const Graph = require("./Graph");
-const Solve = require("./Solve");
-const Random = require("./Random");
+const SampleArray = require("../SampleArray");
+const Graph = require("../ads/Graph");
+const Solve = require("../Solve");
 
 class ProblemShortestPath {
 

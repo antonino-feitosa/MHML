@@ -1,8 +1,9 @@
 
-const check = require('./Tests.js');
-const Graph = require("../src/Graph");
-const Random = require("../src/Random");
-const ProblemShortestPath = require('../src/ProblemShortestPath');
+/*
+const check = require('../../Tests.js');
+const Graph = require("../../../src/ads/Graph");
+const Random = require("../src/ads/Random");
+const ProblemShortestPath = require('../src/problems/ProblemShortestPath');
 
 function createGraph() {
 	let g = new Graph();
@@ -104,3 +105,4 @@ testGenerator(1);
 testGenerator(2);
 testGenerator(3);
 testGenerator(4);
+*/

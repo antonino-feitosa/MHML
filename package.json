@@ -1,0 +1,27 @@
+{
+  "name": "mhml",
+  "version": "1.0.0",
+  "description": "Metaheuristic and Machine Learning Algorithms",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage --onlyChanged"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antonino-feitosa/MHML.git"
+  },
+  "keywords": [
+    "Metaheuristic",
+    "Machine",
+    "Learning",
+    "Algorithm",
+    "Data",
+    "Structures"
+  ],
+  "author": "Antonino Feitosa <antonino_feitosa@yahoo.com.br>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/antonino-feitosa/MHML/issues"
+  },
+  "homepage": "https://github.com/antonino-feitosa/MHML#readme"
+}

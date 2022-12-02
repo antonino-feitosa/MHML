@@ -17,7 +17,7 @@ class Edge {
 		} else if (node === this.dest) {
 			return this.source;
 		} else {
-			return null;
+			throw node.value + ' is not a neighbor';
 		}
 	}
 }
@@ -31,6 +31,9 @@ class Node {
 	}
 
 	connect(node, cost, directed = true) {
+		if(this.edges.find(e => e.contains(node)))
+			throw node.value + ' is a neighbor';
+
 		let edge = new Edge(this, node, cost);
 		this.edges.push(edge);
 		if(!directed){
@@ -47,7 +50,7 @@ class Node {
 	costTo(node){
 		let edge = this.edges.find(e => e.contains(node));
 		if(!edge)
-			throw node + ' It is not a neighbor';
+			throw node.value + ' is not a neighbor';
 		return edge.cost;
 	}
 
@@ -69,8 +72,8 @@ class Graph {
 		return this.nodes.length;
 	}
 
-	get nomEdges(){
-		return thsi.edges.length;
+	get numEdges(){
+		return this.edges.length;
 	}
 
 	add(value) {
