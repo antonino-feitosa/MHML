@@ -8,11 +8,10 @@ class ProblemShortestPath {
 	// real priority based representation whitout the source
 	// decoding by travesing to adajacent vertice of maximum priority
 
-	constructor(graph, source, dest, rand) {
+	constructor(graph, source, dest) {
 		this.source = source;
 		this.dest = dest;
 		this.graph = graph;
-		this.rand = rand;
 	}
 
 	emptySolve() {
@@ -21,9 +20,9 @@ class ProblemShortestPath {
 		return solve;
 	}
 
-	sampleSolve(){
+	sampleSolve(rand){
 		let solve = this.emptySolve();
-		solve.vector = solve.vector.map(_ => this.rand.nextDouble());
+		solve.vector = solve.vector.map(_ => rand.nextDouble());
 		return solve;
 	}
 
