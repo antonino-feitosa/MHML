@@ -16,8 +16,13 @@ class SampleArray extends Array {
 	}
 
 	choice() {
-		let index = this.rand.nextInt(this.length);
+		let index = this.choiceIndex();
 		return this[index];
+	}
+
+	choiceIndex(){
+		let index = this.rand.nextInt(this.length);
+		return index;
 	}
 }
 
