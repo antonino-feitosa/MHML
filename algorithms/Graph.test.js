@@ -82,7 +82,7 @@ describe('Test Connections', () => {
 		let exp = ['A'];
 		expect(adj).toEqual(exp);
 
-		expect(() => g.get('A').connect(g.get('H'), 100)).toThrow('H is a neighbor');;
+		expect(() => g.get('A').connect(g.get('H'))).toThrow('H is a neighbor');;
 		expect(() => edge.opposite(g.get('C'))).toThrow('C is not a neighbor');
 	});
 });

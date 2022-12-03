@@ -4,7 +4,7 @@
   "description": "Metaheuristic and Machine Learning Algorithms",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage --onlyChanged"
+    "test": "jest --coverage --onlyChanged --detect-open-handles"
   },
   "repository": {
     "type": "git",
@@ -12,11 +12,9 @@
   },
   "keywords": [
     "Metaheuristic",
-    "Machine",
-    "Learning",
+    "Machine Learning",
     "Algorithm",
-    "Data",
-    "Structures"
+    "Data Structures"
   ],
   "author": "Antonino Feitosa <antonino_feitosa@yahoo.com.br>",
   "license": "ISC",
