@@ -29,7 +29,8 @@ class HillClimbing extends Metaheuristic {
 
 	_bestNeighbor(solve){
 		let neighbors = this.problem.neighbors(current);
-		let best = neighbors.reduce((best, x) => x.value <= best.value ? x : best, solve);
+		let best_solves = [];
+		let best = neighbors.reduce((best, x) => best === null || x.value <= best.value ? x : best, null);
 		return best;
 	}
 }

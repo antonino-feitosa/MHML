@@ -4,7 +4,8 @@
   "description": "Metaheuristic and Machine Learning Algorithms",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage --onlyChanged --detect-open-handles"
+	"simpletest": "jest --onlyChanged",
+    "test": "jest --coverage --onlyChanged --detectOpenHandles"
   },
   "repository": {
     "type": "git",
