@@ -15,6 +15,14 @@ class MinHeap {
 		return this.values.length;
 	}
 
+	get isEmpty() {
+		return this.values.length === 0;
+	}
+
+	get peek() {
+		return this.values[0];
+	}
+
 	push(element) {
 		this.values.push(element);
 		this._up(this.length - 1);
@@ -32,10 +40,6 @@ class MinHeap {
 
 	_swap(a, b) {
 		[this.values[a], this.values[b]] = [this.values[b], this.values[a]];
-	}
-
-	peek() {
-		return this.values[0];
 	}
 
 	pop() {
@@ -58,10 +62,6 @@ class MinHeap {
 			this._swap(index, left);
 			this._down(left);
 		}
-	}
-
-	isEmpty() {
-		return this.values.length === 0;
 	}
 }
 
