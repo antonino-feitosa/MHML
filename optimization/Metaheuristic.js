@@ -16,6 +16,10 @@ class Metaheuristic {
 		return this.stopCondition.isRunning();
 	}
 
+	stop(){
+		this.stopCondition.running = false;
+	}
+
 	nextStep(){
 		this.stopCondition.nextStep();
 	}

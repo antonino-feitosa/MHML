@@ -3,6 +3,7 @@
 // Russell, Stuart J.; Norvig, Peter (2003), Artificial Intelligence: A Modern Approach (2nd ed.), Upper Saddle River, New Jersey: Prentice Hall, pp. 123–130, ISBN 0-13-790395-2
 
 const Metaheuristic = require('../Metaheuristic');
+const ArrayUtils = require('./algorithms');
 
 class HillClimbing extends Metaheuristic {
 
@@ -20,17 +21,20 @@ class HillClimbing extends Metaheuristic {
 		current.evaluate();
 		while(this.isRunning()){
 			let neighbor = this._bestNeighbor(current);
-			if(neighbor != current && neighbor.value <= current.value){
+			if(neighbor != current){
 				current = neighbor;
+				this.nextStep();
+			} else {
+				this.stop();
 			}
-			this.nextStep();
 		}
 	}
 
 	_bestNeighbor(solve){
 		let neighbors = this.problem.neighbors(current);
-		let best_solves = [];
-		let best = neighbors.reduce((best, x) => best === null || x.value <= best.value ? x : best, null);
-		return best;
+		let bestSolves = ArrayUtils.minimumArray(neighbors, (a,b) => a.compare(b));
+		return solve.compare(bestSolves[0]) <= 0 ? ArrayUtils.choose(bestSolves, this.random) : solve;
 	}
 }
+
+module.exports = HillClimbing;

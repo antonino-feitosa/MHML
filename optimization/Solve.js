@@ -2,14 +2,11 @@
 class Solve {
 
 	constructor(vector, problem) {
-		this.cost = null;
+		this.cost = Number.MAX_VALUE;
+		this.isValid = true;
 		this._evaluated = false;
 		this.vector = vector;
 		this.problem = problem;
-	}
-
-	get isValid() {
-		return this._evaluated && this.cost != null;
 	}
 
 	evaluate() {
@@ -36,16 +33,20 @@ class Solve {
 	}
 
 	compare(other) {
-		let cmp = -1;
-		if (other) {
-			if (this.isValid && other.isValid) {
-				cmp = this.cost - other.cost;
-			} else if (this.isValid) {
+		let cmp = 0;
+		if (this !== other) {
+			if(this._evaluated && other._evaluated){
+				if (this.isValid && other.isValid) {
+					cmp = this.cost - other.cost;
+				} else if (this.isValid) {
+					cmp = -1;
+				} else if (other.isValid) {
+					cmp = 1;
+				}
+			} else if(this._evaluated){
 				cmp = -1;
-			} else if (other.isValid) {
+			} else if(other._evaluated){
 				cmp = 1;
-			} else {
-				cmp = 0;
 			}
 		}
 		return cmp;

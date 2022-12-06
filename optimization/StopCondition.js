@@ -15,6 +15,7 @@ class StopCondition {
 		this.numSteps = 0;
 		this.lastUpdt = 0;
 		this.numEvals = 0;
+		this.running = true;
 	}
 
 	/**Increment the number of iterations by 1.*/
@@ -34,7 +35,8 @@ class StopCondition {
 
 	/**Checks if any limit has been reached. */
 	isRunning() {
-		return (this.numSteps - this.lastUpdt) < this.maxNoUpdt
+		return this.running 
+			&& (this.numSteps - this.lastUpdt) < this.maxNoUpdt
 			&& this.numSteps < this.maxSteps
 			&& this.numEvals < this.maxEvals;
 	}
