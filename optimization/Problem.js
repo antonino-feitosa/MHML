@@ -1,8 +1,13 @@
 
 const Solve = require("./Solve");
 
+/** Class represeting a optimization problem. */
 class Problem {
 
+	/**
+	 * It returns a empty solve of the problem.
+	 * @returns A empty solve.
+	 */
 	emptySolve() {
 		return new Solve([], this);
 	}
@@ -24,10 +29,6 @@ class Problem {
 	}
 
 	clone(){
-		return new Problem();
-	}
-
-	static makeProblem() {
 		return new Problem();
 	}
 }
