@@ -1,31 +1,37 @@
 
 function minimumIndex(array, compare = (a, b) => a - b) {
-	return array.reduce((minimal, current, index) => {
-		-1 || compare(current, array[minimal]) <= 0 ? index : minimal
-	}, -1);
+	let index = -1;
+	if(array.length > 0){
+		index = 0;
+		array.forEach((x, index) => compare(x, array[index]) < 0? index : x);
+	}
+	return index;
+	
+	/*return array.reduce((minimal, current, index) =>
+		minimal === -1 ||
+		compare(current, array[minimal]) < 0
+		? index : minimal, -1);*/
 }
 
-function minimumElement(array, compare = (a, b) => a - b) {
+function minimum(array, compare = (a, b) => a - b) {
 	let index = minimumIndex(array, compare);
 	return index >= 0 ? array[index] : null;
 }
 
 function minimumArray(array, compare = (a, b) => a - b) {
-	let arr = [];
-	array.forEach((minimal, current) => {
-		if(!minimal){
+	return array.reduce((arr, current) => {
+		if (arr.length === 0) {
 			arr.push(current);
 		} else {
-			let cmp = compare(current, minimal);
-			if(cmp < 0){
+			let cmp = compare(current, arr[0]);
+			if (cmp < 0) {
 				arr.length = 0;
 				arr.push(current);
-			} else if(cmp === 0){
+			} else if (cmp === 0) {
 				arr.push(current);
 			}
 		}
-	});
-	return arr;
+	}, []);
 }
 
 function shuffle(array, rand) {
@@ -35,12 +41,25 @@ function shuffle(array, rand) {
 	}
 }
 
-function chooseElement(array, rand){
+function choose(array, rand) {
+	if (array.length === 0)
+		throw new Error('It is not possible to choose a element of a empty set.');
 	let index = this.choiceIndex(array, rand);
 	return this[index];
 }
 
-function chooseIndex(array, rand){
+function chooseIndex(array, rand) {
+	if (array.length === 0)
+		throw new Error('It is not possible to choose a element of a empty set.');
 	let index = rand.nextInt(array.length);
 	return index;
+}
+
+module.exports = {
+	minimumIndex,
+	minimum,
+	minimumArray,
+	shuffle,
+	choose,
+	chooseIndex
 }
