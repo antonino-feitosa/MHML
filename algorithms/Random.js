@@ -4,7 +4,7 @@
 	The javascript switch to 32-bit integer mode during bitwise operation (justifies the 128 version over 256).
 
 	Implementation based on the stackoverflow discussion:
-	{@link https://stackoverflow.com/questions/521295/seeding-the-random-number-generator-in-javascript| stackoverflow.com}
+	@see {@link https://stackoverflow.com/questions/521295/seeding-the-random-number-generator-in-javascript| stackoverflow.com}
  */
 class Random {
 

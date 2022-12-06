@@ -65,10 +65,10 @@ describe.each([
 			expect(ArrayUtils.choose(array, rand)).toBe(array[0]);
 		});
 
-		if('shuffle must move the first element to the last position',()=>{
+		it('shuffle must move the first element to the last position',()=>{
 			let exp = Array.from(array);
 			exp.push(exp.shift());
-			expect(ArrayUtils.shuffle(array)).toEqual(exp);
+			expect(ArrayUtils.shuffle(array, rand)).toEqual(exp);
 		});
 	});
 
@@ -84,9 +84,8 @@ describe.each([
 			expect(ArrayUtils.choose(array, rand)).toBe(array[array.length -1]);
 		});
 
-		if('shuffle must reverse the array',()=>{
-			expect(ArrayUtils.shuffle(array)).toEqual(array.reverse());
+		it('shuffle must reverse the array',()=>{
+			expect(ArrayUtils.shuffle(array, rand)).toEqual(array.reverse());
 		});
 	});
 });
-
