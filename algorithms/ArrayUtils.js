@@ -1,16 +1,9 @@
 
 function minimumIndex(array, compare = (a, b) => a - b) {
-	let index = -1;
-	if(array.length > 0){
-		index = 0;
-		array.forEach((x, index) => compare(x, array[index]) < 0? index : x);
-	}
-	return index;
-	
-	/*return array.reduce((minimal, current, index) =>
+	return array.reduce((minimal, current, index) =>
 		minimal === -1 ||
 		compare(current, array[minimal]) < 0
-		? index : minimal, -1);*/
+		? index : minimal, -1);
 }
 
 function minimum(array, compare = (a, b) => a - b) {
@@ -31,21 +24,24 @@ function minimumArray(array, compare = (a, b) => a - b) {
 				arr.push(current);
 			}
 		}
+		return arr;
 	}, []);
 }
 
+//  Fisher–Yates shuffle algorithm
 function shuffle(array, rand) {
 	for (let i = 0; i < array.length - 1; i++) {
 		let index = (i + 1) + rand.nextInt(array.length - i - 1);
 		[array[i], array[index]] = [array[index], array[i]];
 	}
+	return array;
 }
 
 function choose(array, rand) {
 	if (array.length === 0)
 		throw new Error('It is not possible to choose a element of a empty set.');
-	let index = this.choiceIndex(array, rand);
-	return this[index];
+	let index = chooseIndex(array, rand);
+	return array[index];
 }
 
 function chooseIndex(array, rand) {
