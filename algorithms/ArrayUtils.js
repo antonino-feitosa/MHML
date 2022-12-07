@@ -27,8 +27,8 @@
 function minimumIndex(array, compare = (a, b) => a - b) {
 	return array.reduce((minimal, current, index) =>
 		minimal === -1 ||
-		compare(current, array[minimal]) < 0
-		? index : minimal, -1);
+			compare(current, array[minimal]) < 0
+			? index : minimal, -1);
 }
 
 /**
@@ -127,28 +127,27 @@ function chooseIndex(array, rand) {
  * @param {*} x - The queried element.
  * @param {Array} array - A sorted (descending order) array of elements.
  * @param {Comparator} compare - The comparator between two elements (default: (a, b) => a - b).
- * @returns {{index:int, found:boolean}} A object representing the search final `index` and if the element `x` has been `found`.
+ * @returns {int} The last index accessed.
  */
-function _binarySearch(x, array, compare = (a,b) => a - b){
-    let start = 0;
-    let end = array.length - 1;
+function _binarySearch(x, array, compare = (a, b) => a - b) {
+	let start = 0;
+	let end = array.length - 1;
 	let index = -1;
 	console.log(array);
-    while(start <= end){
-        index = Math.floor((start+end)/2);
+	while (start <= end) {
+		index = Math.floor((start + end) / 2);
 		let cmp = compare(array[index], x);
-		console.log('\t', start, end, index, array[index], Math.sign(cmp));
-        if(cmp === 0){
-            return {index: index, found: true};
-        } else {
-            if(cmp > 0){
-                end = index - 1;
-            } else {
+		if (cmp === 0) {
+			return index;
+		} else {
+			if (cmp > 0) {
+				end = index - 1;
+			} else {
 				start = index + 1;
-            }
-        }
-    }
-    return {index: index, found: false};;
+			}
+		}
+	}
+	return index;
 }
 
 /**
@@ -158,9 +157,9 @@ function _binarySearch(x, array, compare = (a,b) => a - b){
  * @param {Comparator} compare - The comparator between two elements (default: (a, b) => a - b).
  * @returns {int} The index of the first ocurrence of `x` in the `array`or -1 if `x` is not present.
  */
-function binarySearch(x, array, compare = (a,b) => a - b){
-    let ret = _binarySearch(x, array, compare);
-	return ret.found ? ret.index : -1;
+function binarySearch(x, array, compare = (a, b) => a - b) {
+	let index = _binarySearch(x, array, compare);
+	return compare(array[index], x) === 0 ? index : -1;
 }
 
 /**
@@ -170,16 +169,30 @@ function binarySearch(x, array, compare = (a,b) => a - b){
  * @param {Comparator} compare - The comparator between two elements (default: (a, b) => a - b).
  * @returns {int} The index of the greater element of the array that is less than or equals to `x`.
  */
-function smallestNearestElement(x, array, compare = (a,b) => a - b){
-    let ret = _binarySearch(x, array, compare);
-	let cmp = compare(array[ret.index], x);
-	if(cmp <= 0){
-		return ret.index;
-	} else if(ret.index > 0){
-		return ret.index -1;
-	} else {
-		return -1;
-	}
+/*
+
+			 15
+		7
+	3	     9 
+ 1     6   8    10
+0 2   5
+
+0 1 2 3 4 5 6 7 8 9 10 15
+
+predecessor(4) = 3
+Last right node, reset on left step
+
+
+
+*/
+function predecessor(x, array, compare = (a, b) => a - b) {
+	let index = _binarySearch(x, array, compare) - 1;
+	return index >= 0 && index < array.length ? index : - 1;
+}
+
+function successor(x, array, compare = (a, b) => a - b) {
+	let index = _binarySearch(x, array, compare) + 1;
+	return index >= 0 && index < array.length ? index : + 1;
 }
 
 
@@ -191,5 +204,5 @@ module.exports = {
 	choose,
 	chooseIndex,
 	binarySearch,
-	smallestNearestElement
+	predecessor
 }
