@@ -1,5 +1,5 @@
 
-class MinHeap {
+class Heap {
 
 	constructor(values = [], compare = (x,y) => x - y) {
 		this.compare = compare;
@@ -65,4 +65,4 @@ class MinHeap {
 	}
 }
 
-module.exports = MinHeap;
+module.exports = Heap;
