@@ -89,3 +89,96 @@ describe.each([
 		});
 	});
 });
+
+describe('for searchs',()=>{
+	describe('in a empty array',()=>{
+		it('the binary search must return -1',()=>{
+			expect(ArrayUtils.binarySearch(1, [])).toBe(-1);
+		});
+
+		it('the smallest nearest element must return -1',()=>{
+			expect(ArrayUtils.smallestNearestElement(1, [])).toBe(-1);
+		});
+	});
+
+	describe('in the array [1,2,3,6,7]',()=>{
+		
+		let vet = [1,2,3,6,7];
+
+		describe('the binary search', ()=>{
+
+			it('for the element 1 must return 0',()=>{
+				let index = ArrayUtils.binarySearch(1, vet);
+				expect(index).toBe(0);
+				expect(vet[index]).toBe(1);
+			});
+	
+			it('for the element 3 must return 2',()=>{
+				let index = ArrayUtils.binarySearch(3, vet);
+				expect(index).toBe(2);
+				expect(vet[index]).toBe(3);
+			});
+	
+			it('for the element 7 must return 4',()=>{
+				let index = ArrayUtils.binarySearch(7, vet);
+				expect(index).toBe(4);
+				expect(vet[index]).toBe(7);
+			});
+	
+			it('for the element 5 must return -1',()=>{
+				expect(ArrayUtils.binarySearch(5, vet)).toBe(-1);
+			});
+	
+			it('for the element 0 must return -1',()=>{
+				expect(ArrayUtils.binarySearch(0, vet)).toBe(-1);
+			});
+	
+			it('for the element 6 must return -1',()=>{
+				expect(ArrayUtils.binarySearch(6, vet)).toBe(-1);
+			});	
+		});
+
+		describe.skip('the smallest nearest element', ()=>{
+
+			it('for the 0 is -1',()=>{
+				expect(ArrayUtils.smallestNearestElement(0, vet)).toBe(-1);
+			});
+	
+			it('for the 1 is -1',()=>{
+				expect(ArrayUtils.smallestNearestElement(1, vet)).toBe(-1);
+			});
+	
+			it('for the 2 is 1 (index 0)',()=>{
+				expect(ArrayUtils.smallestNearestElement(2, vet)).toBe(0);
+			});
+	
+			it('for the 3 is 2 (index 1)',()=>{
+				expect(ArrayUtils.smallestNearestElement(3, vet)).toBe(1);
+			});
+	
+			it('for the 4 is 3 (index 2)',()=>{
+				expect(ArrayUtils.smallestNearestElement(4, vet)).toBe(2);
+			});
+	
+			it('for the 5 is 3 (index 2)',()=>{
+				expect(ArrayUtils.smallestNearestElement(5, vet)).toBe(2);
+			});
+	
+			it('for the 6 is 3 (index 2)',()=>{
+				expect(ArrayUtils.smallestNearestElement(6, vet)).toBe(2);
+			});
+	
+			it('for the 7 is 6 (index 3)',()=>{
+				expect(ArrayUtils.smallestNearestElement(7, vet)).toBe(3);
+			});
+	
+			it('for the 8 is 7 (index 4)',()=>{
+				expect(ArrayUtils.smallestNearestElement(8, vet)).toBe(4);
+			});
+	
+			it('for the 10 is 7 (index 4)',()=>{
+				expect(ArrayUtils.smallestNearestElement(10, vet)).toBe(4);
+			});
+		});
+	});
+});
