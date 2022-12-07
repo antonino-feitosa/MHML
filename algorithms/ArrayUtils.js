@@ -133,16 +133,18 @@ function _binarySearch(x, array, compare = (a,b) => a - b){
     let start = 0;
     let end = array.length - 1;
 	let index = -1;
+	console.log(array);
     while(start <= end){
         index = Math.floor((start+end)/2);
 		let cmp = compare(array[index], x);
+		console.log('\t', start, end, index, array[index], Math.sign(cmp));
         if(cmp === 0){
             return {index: index, found: true};
         } else {
             if(cmp > 0){
-                start = index + 1;
-            } else {
                 end = index - 1;
+            } else {
+				start = index + 1;
             }
         }
     }

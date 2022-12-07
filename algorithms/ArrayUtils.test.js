@@ -133,27 +133,33 @@ describe('for searchs',()=>{
 				expect(ArrayUtils.binarySearch(0, vet)).toBe(-1);
 			});
 	
-			it('for the element 6 must return -1',()=>{
-				expect(ArrayUtils.binarySearch(6, vet)).toBe(-1);
-			});	
+			it('for the element 6 must return 3',()=>{
+				let index = ArrayUtils.binarySearch(6, vet);
+				expect(index).toBe(3);
+				expect(vet[index]).toBe(6);
+			});
+			
+			it('for the element 10 must return -1',()=>{
+				expect(ArrayUtils.binarySearch(10, vet)).toBe(-1);
+			});
 		});
 
-		describe.skip('the smallest nearest element', ()=>{
+		describe('the smallest nearest element', ()=>{
 
 			it('for the 0 is -1',()=>{
 				expect(ArrayUtils.smallestNearestElement(0, vet)).toBe(-1);
 			});
 	
-			it('for the 1 is -1',()=>{
-				expect(ArrayUtils.smallestNearestElement(1, vet)).toBe(-1);
+			it('for the 1 is 1 (index 0)',()=>{
+				expect(ArrayUtils.smallestNearestElement(1, vet)).toBe(0);
 			});
 	
-			it('for the 2 is 1 (index 0)',()=>{
-				expect(ArrayUtils.smallestNearestElement(2, vet)).toBe(0);
+			it('for the 2 is 2 (index 1)',()=>{
+				expect(ArrayUtils.smallestNearestElement(2, vet)).toBe(1);
 			});
 	
-			it('for the 3 is 2 (index 1)',()=>{
-				expect(ArrayUtils.smallestNearestElement(3, vet)).toBe(1);
+			it('for the 3 is 3 (index 2)',()=>{
+				expect(ArrayUtils.smallestNearestElement(3, vet)).toBe(2);
 			});
 	
 			it('for the 4 is 3 (index 2)',()=>{
@@ -164,12 +170,12 @@ describe('for searchs',()=>{
 				expect(ArrayUtils.smallestNearestElement(5, vet)).toBe(2);
 			});
 	
-			it('for the 6 is 3 (index 2)',()=>{
-				expect(ArrayUtils.smallestNearestElement(6, vet)).toBe(2);
+			it('for the 6 is 6 (index 3)',()=>{
+				expect(ArrayUtils.smallestNearestElement(6, vet)).toBe(3);
 			});
 	
-			it('for the 7 is 6 (index 3)',()=>{
-				expect(ArrayUtils.smallestNearestElement(7, vet)).toBe(3);
+			it('for the 7 is 7 (index 4)',()=>{
+				expect(ArrayUtils.smallestNearestElement(7, vet)).toBe(4);
 			});
 	
 			it('for the 8 is 7 (index 4)',()=>{
