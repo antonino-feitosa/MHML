@@ -127,18 +127,18 @@ function chooseIndex(array, rand) {
  * @param {*} x - The queried element.
  * @param {Array} array - A sorted (descending order) array of elements.
  * @param {Comparator} compare - The comparator between two elements (default: (a, b) => a - b).
- * @returns {int} The last index accessed.
+ * @returns {{index:int, found:boolean, start:int, end, int}} A object with the final state of the binary search.
  */
 function _binarySearch(x, array, compare = (a, b) => a - b) {
 	let start = 0;
 	let end = array.length - 1;
 	let index = -1;
-	console.log(array);
-	while (start <= end) {
+	let found = false;
+	while (!found && start <= end) {
 		index = Math.floor((start + end) / 2);
 		let cmp = compare(array[index], x);
 		if (cmp === 0) {
-			return index;
+			found = true;
 		} else {
 			if (cmp > 0) {
 				end = index - 1;
@@ -147,7 +147,7 @@ function _binarySearch(x, array, compare = (a, b) => a - b) {
 			}
 		}
 	}
-	return index;
+	return { index: index, found: found, start: start, end: end };
 }
 
 /**
@@ -158,43 +158,41 @@ function _binarySearch(x, array, compare = (a, b) => a - b) {
  * @returns {int} The index of the first ocurrence of `x` in the `array`or -1 if `x` is not present.
  */
 function binarySearch(x, array, compare = (a, b) => a - b) {
-	let index = _binarySearch(x, array, compare);
-	return compare(array[index], x) === 0 ? index : -1;
+	let { index, found } = _binarySearch(x, array, compare);
+	return found ? index : -1;
 }
 
 /**
- * It searchs for the smallest nearest or equals of a element in a array.
+ * It searchs for the predecessor of a element in a array.
  * @param {*} x - The queried element.
  * @param {*} array - The array of elements.
  * @param {Comparator} compare - The comparator between two elements (default: (a, b) => a - b).
- * @returns {int} The index of the greater element of the array that is less than or equals to `x`.
+ * @returns {int} The index of the predecessor `x` if it exists or -1 otherwise.
  */
-/*
-
-			 15
-		7
-	3	     9 
- 1     6   8    10
-0 2   5
-
-0 1 2 3 4 5 6 7 8 9 10 15
-
-predecessor(4) = 3
-Last right node, reset on left step
-
-
-
-*/
 function predecessor(x, array, compare = (a, b) => a - b) {
-	let index = _binarySearch(x, array, compare) - 1;
-	return index >= 0 && index < array.length ? index : - 1;
+	let { index, found, end } = _binarySearch(x, array, compare);
+	if (found) {
+		return index - 1;
+	} else {
+		return end < 0 ? -1 : end;
+	}
 }
 
+/**
+ * It searchs for the successor of a element in a array.
+ * @param {*} x - The queried element.
+ * @param {*} array - The array of elements.
+ * @param {Comparator} compare - The comparator between two elements (default: (a, b) => a - b).
+ * @returns {int} The index of the successor `x` if it exists or -1 otherwise.
+ */
 function successor(x, array, compare = (a, b) => a - b) {
-	let index = _binarySearch(x, array, compare) + 1;
-	return index >= 0 && index < array.length ? index : + 1;
+	let { index, found, start } = _binarySearch(x, array, compare);
+	if (found) {
+		return index + 1 < array.length ? index + 1 : -1;
+	} else {
+		return start >= array.length ? -1 : start;
+	}
 }
-
 
 module.exports = {
 	minimumIndex,
@@ -204,5 +202,6 @@ module.exports = {
 	choose,
 	chooseIndex,
 	binarySearch,
-	predecessor
+	predecessor,
+	successor
 }
