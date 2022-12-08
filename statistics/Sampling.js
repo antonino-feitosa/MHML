@@ -9,7 +9,7 @@ const {predecessor} = require('./algorithms');
  * @param {Random} random - The pseudorandom number generator used in the sampling.
  * @returns {int} A random index in the vector with the respect to the probability distribuition.
  */
-function rouletteWheelSelection(values = [], prob = x => x, random){
+function rouletteWheelSelectionScalarized(values = [], prob = x => x, random){
     let f = [];
     let previous = 0;
     values.forEach((x, i) => f[i] = previous + prob(x));
@@ -27,7 +27,7 @@ function rouletteWheelSelection(values = [], prob = x => x, random){
  * @param {Random} random - The pseudorandom number generator used in the sampling.
  * @returns {int} A random index in the vector with the respect to the probability distribuition.
  */
-function rouletteWheelSelectionScalarized(values = [], prob = x => x, random){
+function rouletteWheelSelection(values = [], prob = x => x, random){
     let f = [];
     let previous = 0;
     values.forEach((x, i) => f[i] = previous + prob(x));
