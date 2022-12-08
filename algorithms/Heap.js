@@ -7,11 +7,11 @@ class Heap {
 	 * @param {Array} values - The initial values (default: empty []).
 	 * @param {Comparator} compare - The comparator between two elements (default: (a, b) => a - b).
 	 */
-	constructor(values = [], compare = (x,y) => x - y) {
+	constructor(values = [], compare = (x, y) => x - y) {
 		this.compare = compare;
 		this.values = values;
 		if (values.length > 1) {
-			for (let i = values.length / 2; i >= 0; i--) {
+			for (let i = Math.floor(values.length / 2); i >= 0; i--) {
 				this._down(i);
 			}
 		}
@@ -27,8 +27,14 @@ class Heap {
 		return this.values.length === 0;
 	}
 
-	/** @property {*} peek - Retrieve but not remove the most important element with respect to the comparator function. */
+	/**
+	 * @property {*} peek - Retrieve but not remove the most important element with respect to the comparator function.
+	 * @throws {Error} The heap can not be empty.
+	*/
 	get peek() {
+		if (this.isEmpty) {
+			throw new Error('The heap is empty!');
+		}
 		return this.values[0];
 	}
 
@@ -49,13 +55,15 @@ class Heap {
 	 * @throws {Error} The heap can not be empty.
 	 */
 	pop() {
-		if(this.isEmpty){
+		if (this.isEmpty) {
 			throw new Error('The heap is empty!');
 		}
 		let e = this.values[0];
 		this.values[0] = this.values[this.length - 1];
 		this.values.length -= 1;
-		if (this.length > 0) { this._down(0); }
+		if (this.length > 0) {
+			this._down(0);
+		}
 		return e;
 	}
 

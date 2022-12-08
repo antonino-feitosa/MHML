@@ -1,6 +1,19 @@
 # MHML
 Metaheristcs and Machine Learning Algorithms
 
+## Development Plan
+
+- [ ] Implement Radix Tree
+- [ ] Document and test the current code
+- [ ] Implement Simulated Annealing
+- [ ] Implement Genetic Algorithm
+- [ ] Implement Tabu Search
+- [ ] Implement GRASP
+- [ ] Implement VNS
+- [ ] Implement Ant Colony Optimization
+- [ ] Implenent Particle Swarm Optimization
+- [ ] Implement Memetic Algorithms
+
 ### Combinatorial Optimization Problems
 
 - [ ] allocating register memory  
